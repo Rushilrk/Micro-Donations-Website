@@ -1,0 +1,14 @@
+language: python
+python:
+- '3.8'
+install:
+- pip install -r requirements-travis.txt
+script:
+- python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: MkO6atimuScWdI1Be362XoXou55r7dZxz/h3nUKs0W+Mqc9/z44GShjn6SoW5zBWT6uqriTK8I01F5TQy9jVWBeu7tCMoANBTE5kK+PRq+QIfsQxpX3+Lw79uA2Q8BaFypg1IhqsW+LyEnNzSO75f/eVHp15cfDqer2hfxogAFJU9tjljZEcguXR5Ca5n3XwRKTAaVVAe3JAkn/Da04lT0x8h3fWyOtVf/vZ/Y/SSZ/PxE6v/SIdo212bRCwjDSyuXRRLZVJZlrDD85jMSKWGhf+HAEGWpz/jhJNxer0MKykJ/wLqPgsWjWHgFQITg/vezJBE5JTllYev3wVY9UqJZOJVXTLEviKhYRrl7sNeyLRUr0rbjLrd/GXLvXsyWLf/SW7nANoNT3UkJdS71gDAn0nPuTSh5Wj6zZOoTxngu+v2tO7GenSMs9GC6uZquhakWpI0jA0+P7aNdWkfAznPG/3r6W80s28pdT4Fm14tjvsLr+nfRyNtwg7AEpo65DCnTr7rv4LNmQ3DAFP5DrJNEDdJaVeIOcm2HjSe0J78QBjjTghvdjXRAMZpB1khR6/YmValmIcRzdGjKiWfHeXliVd2sfmz2ApqWFuN1QCWDAnDjaRdC8YRBPEcAPqpWILvcWskNns9WjSyuPPa1A/J0QHvgVvxuUdu5bSOmRbRd4=
+  app: micro-donations
+  on:
+    repo: uva-cs3240-f20/project-2-19
