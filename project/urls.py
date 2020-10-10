@@ -18,7 +18,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="donation_app/index.html")),
+    path('', TemplateView.as_view(template_name="donation_app/index.html"), name='main'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('donation/', include('donation_app.urls')),
 ]
