@@ -52,13 +52,13 @@ class VolunteerDetails(generic.DetailView):
 
 class UpdateDonation(generic.UpdateView):
     model = Donation
-    form_class = UpdateDonationForm
+    form_class = DonationForm
     template_name = 'donation_app/update_donation.html'
 
 
 class UpdateVolunteer(generic.UpdateView):
     model = Volunteer
-    form_class = UpdateVolunteerForm
+    form_class = VolunteerForm
     template_name = 'donation_app/update_volunteer.html'
 
 class DeleteDonation(generic.DeleteView):

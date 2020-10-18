@@ -9,7 +9,7 @@ class DonationForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
-            'creator': forms.TextInput(attrs={'class': 'form-control'}),
+           # 'creator': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'external_link': forms.TextInput(attrs={'class': 'form-control'}),
             'contact_info': forms.TextInput(attrs={'class': 'form-control'})
@@ -22,7 +22,7 @@ class VolunteerForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
-            'creator': forms.TextInput(attrs={'class': 'form-control'}),
+           # 'creator': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'external_link': forms.TextInput(attrs={'class': 'form-control'}),
             'contact_info': forms.TextInput(attrs={'class': 'form-control'})
