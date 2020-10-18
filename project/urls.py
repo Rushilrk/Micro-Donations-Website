@@ -21,5 +21,5 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name="donation_app/index.html"), name='main'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('donation/', include('donation_app.urls')),
+    path('', include('donation_app.urls')),
 ]
