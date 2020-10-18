@@ -2,7 +2,7 @@
 {% load socialaccount %}
 <html lang="en">
 <head>
-    <title>Micro-Donation Main Page</title>
+    <title>Donation Details</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,16 +23,16 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="donation/list">Donations</a>
+        <a class="nav-link" href="{% url 'donation' %}">Donations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="volunteer/list">Volunteer</a>
+        <a class="nav-link" href="{% url 'volunteer' %}">Volunteer</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="donation/">Create a Donation</a>
+        <a class="nav-link" href="{% url 'donation_make' %}">Create a Donation</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="volunteer/">Create a Volunteering Opportunity</a>
+        <a class="nav-link" href="{% url 'volunteer_make' %}">Create a Volunteering Opportunity</a>
       </li>
     </ul>
       <ul class="navbar-nav">
@@ -46,9 +46,23 @@
   </div>
 </nav>
 <div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>Micro-Donations</h1>
-  <p>Welcome, {{ user.username }} !</p>
+  <h1>Donations Page</h1>
+  <p>View All Donations Here</p>
     <p>Discover or find donations or volunteer opportunities below!</p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
+        <p class=" text-muted">{{ donation.creator }} | {{ donation.created_on }}</p>
+          <p class=" text-muted">{{ donation.contact_info }} | {{ donation.external_link }}</p>
+        <p class="card-text ">{{ donation.description | safe }}</p>
+          <a href="{% url 'donation' %}" class="btn btn-primary">Go Back</a>
+          <a href="{% url 'delete_donation' donation.slug %}" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% else %}

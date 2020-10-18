@@ -2,7 +2,7 @@
 {% load socialaccount %}
 <html lang="en">
 <head>
-    <title>Micro-Donation Main Page</title>
+    <title>Update Donation</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,16 +23,16 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="donation/list">Donations</a>
+        <a class="nav-link" href="{% url 'donation' %}">Donations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="volunteer/list">Volunteer</a>
+        <a class="nav-link" href="{% url 'volunteer' %}">Volunteer</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="donation/">Create a Donation</a>
+        <a class="nav-link" href="{% url 'donation_make' %}">Create a Donation</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="volunteer/">Create a Volunteering Opportunity</a>
+        <a class="nav-link" href="{% url 'volunteer_make' %}">Create a Volunteering Opportunity</a>
       </li>
     </ul>
       <ul class="navbar-nav">
@@ -46,10 +46,20 @@
   </div>
 </nav>
 <div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>Micro-Donations</h1>
-  <p>Welcome, {{ user.username }} !</p>
-    <p>Discover or find donations or volunteer opportunities below!</p>
+  <h1>Update Donation</h1>
 </div>
+<div class="container">
+{% block content %}
+    <h1>Update Your Volunteer Event</h1>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
 
 {% else %}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">

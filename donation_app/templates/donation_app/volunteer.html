@@ -2,7 +2,7 @@
 {% load socialaccount %}
 <html lang="en">
 <head>
-    <title>Micro-Donation Main Page</title>
+    <title>View All Volunteering Opportunities</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,16 +23,16 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="donation/list">Donations</a>
+        <a class="nav-link" href="{% url 'donation' %}">Donations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="volunteer/list">Volunteer</a>
+        <a class="nav-link" href="{% url 'volunteer' %}">Volunteer</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="donation/">Create a Donation</a>
+        <a class="nav-link" href="{% url 'donation_make' %}">Create a Donation</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="volunteer/">Create a Volunteering Opportunity</a>
+        <a class="nav-link" href="{% url 'volunteer_make' %}">Create a Volunteering Opportunity</a>
       </li>
     </ul>
       <ul class="navbar-nav">
@@ -46,9 +46,27 @@
   </div>
 </nav>
 <div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>Micro-Donations</h1>
-  <p>Welcome, {{ user.username }} !</p>
+  <h1>Volunteer Page</h1>
+  <p>View All Volunteering Here</p>
     <p>Discover or find donations or volunteer opportunities below!</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 left">
+            {% for volunteer in volunteer_list %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ volunteer.title }}</h2>
+                    <p class="card-text text-muted h6">{{ volunteer.creator }} | {{ volunteer.created_on}} </p>
+                    <p class="card-text text-muted h6">{{ volunteer.contact_info }} | {{ volunteer.external_link}} </p>
+                    <p class="card-text">{{volunteer.description|slice:":200" }}</p>
+                    <a href="{% url 'volunteer_detail' volunteer.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="{% url 'update_volunteer' volunteer.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
 {% else %}
