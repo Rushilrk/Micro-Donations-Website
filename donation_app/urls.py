@@ -11,5 +11,5 @@ urlpatterns = [
     path('donation/update/<slug:slug>/', views.UpdateDonation.as_view(), name='update_donation'),
     path('volunteer/update/<slug:slug>/', views.UpdateVolunteer.as_view(), name='update_volunteer'),
     path('donation/delete/<slug:slug>/', views.DeleteDonation.as_view(), name='delete_donation'),
-    path('volunteer/delete/<slug:slug>/', views.VolunteerDonation.as_view(), name='delete_volunteer'),
+    path('volunteer/delete/<slug:slug>/', views.VolunteerDelete.as_view(), name='delete_volunteer'),
 ]

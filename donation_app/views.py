@@ -66,7 +66,7 @@ class DeleteDonation(generic.DeleteView):
     template_name = 'donation_app/delete_donation.html'
     success_url = reverse_lazy('donation')
 
-class VolunteerDonation(generic.DeleteView):
+class VolunteerDelete(generic.DeleteView):
     model = Volunteer
     template_name = 'donation_app/delete_volunteer.html'
     success_url = reverse_lazy('volunteer')
