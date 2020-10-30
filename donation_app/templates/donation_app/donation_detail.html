@@ -59,7 +59,10 @@
           <p class=" text-muted">{{ donation.contact_info }} | {{ donation.external_link }}</p>
         <p class="card-text ">{{ donation.description | safe }}</p>
           <a href="{% url 'donation' %}" class="btn btn-primary">Go Back</a>
-          <a href="{% url 'delete_donation' donation.slug %}" class="btn btn-primary">Delete</a>
+          {% if user.id == volunteer.creator.id %}
+          <a href="{% url 'update_volunteer' volunteer.slug  %}" class="btn btn-primary">Update &rarr;</a>
+          <a href="{% url 'delete_volunteer' volunteer.slug %}" class="btn btn-primary">Delete</a>
+          {% endif %}
       </div>
     </div>
   </div>

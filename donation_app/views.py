@@ -1,8 +1,10 @@
 from django.shortcuts import render,HttpResponseRedirect
-from .models import Donation, Volunteer
+from .models import Donation, Volunteer, Profile
 from django.views import generic
 from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm
 from django.urls import reverse_lazy
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -70,3 +72,12 @@ class VolunteerDelete(generic.DeleteView):
     model = Volunteer
     template_name = 'donation_app/delete_volunteer.html'
     success_url = reverse_lazy('volunteer')
+
+
+@login_required
+def profile(request):
+    return render(request, 'donation_app/profile.html')
+
+def Logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
