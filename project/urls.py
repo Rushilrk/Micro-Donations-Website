@@ -18,9 +18,11 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from donation_app import views
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name="donation_app/index.html"), name='main'),
+    path('account/logout/', views.Logout),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('donation_app.urls')),

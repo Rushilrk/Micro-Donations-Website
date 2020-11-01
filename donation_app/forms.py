@@ -1,4 +1,4 @@
-from .models import Donation, Volunteer
+from .models import Donation, Volunteer, Profile
 from django import forms
 
 
@@ -51,5 +51,25 @@ class UpdateVolunteerForm(forms.ModelForm):
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'external_link': forms.TextInput(attrs={'class': 'form-control'}),
+            'contact_info': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+class MakeProfile(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('user', 'image', 'bio', 'contact_info')
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control'}),
+            'contact_info': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+class ProfileUpdate(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('image', 'bio', 'contact_info')
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control'}),
             'contact_info': forms.TextInput(attrs={'class': 'form-control'})
         }

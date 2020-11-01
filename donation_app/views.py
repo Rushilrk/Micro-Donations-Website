@@ -1,7 +1,7 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect, redirect
 from .models import Donation, Volunteer, Profile
 from django.views import generic
-from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm
+from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm, ProfileUpdate, MakeProfile
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -74,9 +74,32 @@ class VolunteerDelete(generic.DeleteView):
     success_url = reverse_lazy('volunteer')
 
 
-@login_required
+def profile_make(request):
+    if request.method == "POST":
+        prof = MakeProfile(request.POST, request.FILES)
+        if prof.is_valid():
+            pf = prof.save(commit=False)
+            pf.save()
+            return HttpResponseRedirect('view')
+    else:
+        prof = MakeProfile()
+    return render(request, 'donation_app/profile_form.html', {'form': prof})
+
+
+#@login_required
 def profile(request):
-    return render(request, 'donation_app/profile.html')
+    if request.method == "POST":
+        form_class = ProfileUpdate(request.POST, request.FILES, instance=request.user.profile)
+        if form_class.is_valid():
+            form_class.save()
+        return redirect('profile')
+    else:
+        form_class = ProfileUpdate(instance=request.user.profile)
+    context = {
+        'form': form_class
+    }
+    return render(request, 'donation_app/profile.html', context)
+
 
 def Logout(request):
     logout(request)
