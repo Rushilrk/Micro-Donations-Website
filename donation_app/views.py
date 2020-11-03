@@ -1,10 +1,9 @@
 from django.shortcuts import render,HttpResponseRedirect, redirect
-from .models import Donation, Volunteer, Profile
+from .models import Donation, Volunteer
 from django.views import generic
-from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm, ProfileUpdate, MakeProfile
+from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm, MakeProfile, ProfileUpdate
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -73,7 +72,6 @@ class VolunteerDelete(generic.DeleteView):
     template_name = 'donation_app/delete_volunteer.html'
     success_url = reverse_lazy('volunteer')
 
-
 def profile_make(request):
     if request.method == "POST":
         prof = MakeProfile(request.POST, request.FILES)
@@ -86,7 +84,6 @@ def profile_make(request):
     return render(request, 'donation_app/profile_form.html', {'form': prof})
 
 
-#@login_required
 def profile(request):
     if request.method == "POST":
         form_class = ProfileUpdate(request.POST, request.FILES, instance=request.user.profile)
@@ -99,7 +96,6 @@ def profile(request):
         'form': form_class
     }
     return render(request, 'donation_app/profile.html', context)
-
 
 def Logout(request):
     logout(request)

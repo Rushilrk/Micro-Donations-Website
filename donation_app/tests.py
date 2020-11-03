@@ -1,9 +1,86 @@
 from django.test import TestCase, SimpleTestCase, Client
-from django.urls import reverse, resolve
-from donation_app.views import donation_make, volunteer_make, DonationList, VolunteerList, DonationDetails, VolunteerDetails, UpdateDonation, UpdateVolunteer, DeleteDonation, VolunteerDelete
 from .models import Donation, Volunteer
-
+from django.contrib.auth.models import User
+from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm
+from django.urls import reverse, resolve
+from .views import donation_make, volunteer_make, DonationList, VolunteerList, DonationDetails, VolunteerDetails, UpdateDonation, UpdateVolunteer, DeleteDonation, VolunteerDelete
 # Create your tests here.
+class DonationModelTest(TestCase):
+    def setUp(self):
+        user = User.objects.create()
+        user.save()
+        Donation.objects.create(title  = "Testing", creator=user,  updated_on = "11/16/2000", description="THIS IS A TEST", created_on="11/16/2000",external_link="",contact_info="",status=0)
+    
+    def test_str(self):
+        bob = Donation.objects.get(title = "Testing")
+        self.assertEquals(str(bob), "Testing", "Does _str function work_")
+        
+    def test_get_absolute_url(self):
+        bob = Donation.objects.get(title = "Testing")
+        self.assertEquals(bob.get_absolute_url(), '/donation/list', "Does url return properly")
+
+class VolunteerModelTest(TestCase):
+    def setUp(self):
+        user = User.objects.create()
+        user.save()
+        Volunteer.objects.create(title  = "Testing", creator=user,  updated_on = "11/16/2000", description="THIS IS A TEST", created_on="11/16/2000",external_link="",contact_info="",status=0)
+    
+    def test_str(self):
+        bob = Volunteer.objects.get(title = "Testing")
+        self.assertEquals(str(bob), "Testing", "Does _str function work_")
+        
+    def test_get_absolute_url(self):
+        bob = Volunteer.objects.get(title = "Testing")
+        self.assertEquals(bob.get_absolute_url(), '/volunteer/list', "Does url return properly")
+
+
+class TestForms(TestCase):
+    
+    #This tests that a valid request succeeds
+    def test_donation_form(self):
+        response = self.client.post('/donation/', {'title' : 'Test', 'slug' : 'something', 'description' : 'Abracadabra', 'external_link': 'abc.com', 'contact_info': '70303213' })
+        self.assertEqual(response.status_code, 200)
+        
+    def test_volunteer_form(self):
+        response = self.client.post('/volunteer/', {'title' : 'Test', 'slug' : 'something', 'description' : 'Abracadabra', 'external_link': 'abc.com', 'contact_info': '70303213' })
+        self.assertEqual(response.status_code, 200)
+    #update forms should be generated, but not available to a random user
+    def test_update_volunteer_form(self):
+        c = Client()
+        response = c.post('/volunteer/', {'title' : 'Test', 'slug' : 'something', 'description' : 'Abracadabra', 'external_link': 'abc.com', 'contact_info': '70303213' })
+        response2 = c.post('/volunteer/something/', {'title' : 'Test', 'slug' : 'something', 'description' : 'Abracadabra', 'external_link': 'abc.com', 'contact_info': '70303213' })
+        self.assertEqual(response2.status_code, 405)
+        
+    def test_update_donation_form(self):
+        c = Client()
+        response = c.post('/donation/', {'title' : 'Test', 'slug' : 'something', 'description' : 'Abracadabra', 'external_link': 'abc.com', 'contact_info': '70303213' })
+        response2 = c.post('/donation/something/', {'title' : 'Test', 'slug' : 'something', 'description' : 'Abracadabra', 'external_link': 'abc.com', 'contact_info': '70303213' })
+        self.assertEqual(response2.status_code, 405)
+        
+class LoginTest(TestCase):
+    def test_login(self):
+        user = User.objects.create(username='testuser')
+        user.set_password('12345')
+        user.save()
+        c = Client()
+        logged_in = c.login(username='testuser', password='12345')
+        self.assertEqual(logged_in, 1, "logging in works")
+        
+    def test_login_wrongpassword(self):
+        user = User.objects.create(username='testuser')
+        user.set_password('12345')
+        user.save()
+        c = Client()
+        logged_in = c.login(username='testuser', password='12346')
+        self.assertEqual(logged_in, 0, "logging in works")
+
+    def test_login_wronguser(self):
+        user = User.objects.create(username='testuser')
+        user.set_password('12345')
+        user.save()
+        c = Client()
+        logged_in = c.login(username='testusers', password='12346')
+        self.assertEqual(logged_in, 0, "logging in works")
 """
 Checks all URLS Are Linked Properly
 """
@@ -89,28 +166,3 @@ class TestViews(TestCase):
         response = self.client.get(self.volunteer_list)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'donation_app/volunteer.html')
-
-
-
-class TestModels(TestCase):
-    def setUp(self):
-        self.donation1 = Donation.objects.create(
-            title='Color Run',
-            slug='color-run',
-            description='This is a color run event',
-            external_link='abcdefg.com',
-            contact_info='123-456-7890',
-            status=1
-        )
-        self.donation2 = Donation.objects.create(
-            title='Salvation Army',
-            slug='salvation_army',
-            description='This is a salvation army event',
-            external_link='abcdefg.com',
-            contact_info='123-456-7890',
-            status=0
-        )
-
-    def check_donation_is_published(self):
-        self.assertEquals(self.donation1.status == 1)
-        self.assertNotEquals(self.donation2.status == 1)
