@@ -37,7 +37,13 @@
     </ul>
       <ul class="navbar-nav">
           <li class="nav-item">
-              <a class="nav-link" href="#">Sign Out</a>
+              <a class="nav-link" href="{% url 'profile_make' %}">Create Profile</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="account/logout">Sign Out</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="/accounts/google/login">Sign Into Different Account</a>
@@ -61,7 +67,9 @@
                     <p class="card-text text-muted h6">{{ donation.contact_info }} | {{ donation.external_link}} </p>
                     <p class="card-text">{{donation.description|slice:":200" }}</p>
                     <a href="{% url 'donation_detail' donation.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    {% if user.id == donation.creator.id %}
                     <a href="{% url 'update_donation' donation.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

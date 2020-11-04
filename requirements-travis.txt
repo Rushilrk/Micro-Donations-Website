@@ -2,3 +2,4 @@ Django
 gunicorn
 django-allauth
 bootstrap4
+Pillow
