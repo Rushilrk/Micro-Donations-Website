@@ -1,0 +1,6 @@
+Django
+gunicorn
+django-heroku
+django-allauth
+bootstrap4
+Pillow
