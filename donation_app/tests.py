@@ -1,9 +1,9 @@
 from django.test import TestCase, SimpleTestCase, Client
-from .models import Donation, Volunteer
+from .models import Donation, Volunteer, Profile
 from django.contrib.auth.models import User
 from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm
 from django.urls import reverse, resolve
-from .views import donation_make, volunteer_make, DonationList, VolunteerList, DonationDetails, VolunteerDetails, UpdateDonation, UpdateVolunteer, DeleteDonation, VolunteerDelete
+from .views import donation_make, volunteer_make, DonationList, VolunteerList, DonationDetails, VolunteerDetails, UpdateDonation, UpdateVolunteer, DeleteDonation, VolunteerDelete, profile_make, profile
 # Create your tests here.
 class DonationModelTest(TestCase):
     def setUp(self):
@@ -33,7 +33,14 @@ class VolunteerModelTest(TestCase):
         bob = Volunteer.objects.get(title = "Testing")
         self.assertEquals(bob.get_absolute_url(), '/volunteer/list', "Does url return properly")
 
-
+class ProfileModelTest(TestCase):
+    def setUp(self):
+        b = User.objects.create(username = "testing")
+        b.save()
+        Profile.objects.create(user = b, bio = 'potato')
+    def test_str(self):
+        bob = Profile.objects.get(bio= 'potato')
+        self.assertEquals(str(bob), f'testing Profile', "Does _str function work_")  
 class TestForms(TestCase):
     
     #This tests that a valid request succeeds
@@ -56,6 +63,16 @@ class TestForms(TestCase):
         response = c.post('/donation/', {'title' : 'Test', 'slug' : 'something', 'description' : 'Abracadabra', 'external_link': 'abc.com', 'contact_info': '70303213' })
         response2 = c.post('/donation/something/', {'title' : 'Test', 'slug' : 'something', 'description' : 'Abracadabra', 'external_link': 'abc.com', 'contact_info': '70303213' })
         self.assertEqual(response2.status_code, 405)
+        
+   ## def test_profile_form(self):
+    #     user = User.objects.create(username='testuser')
+    #     user.set_password('12345')
+     #   user.save()
+    #    c = Client()
+    #    logged_in = c.login(username='testuser', password='12345')
+       # response1 = c.post('/profile/make/', {'bio' : 'something', 'contactinfo' : 'Abracadabra'})
+    #    response = c.get('/profile/view/')
+   #     self.assertEqual(response.status_code, 200)
         
 class LoginTest(TestCase):
     def test_login(self):
@@ -134,6 +151,13 @@ class TestUrls(SimpleTestCase):
         url = reverse('delete_volunteer', args=['web-slug'])
         self.assertNotEquals(resolve(url).func.view_class, DonationList)
 
+    def test_profile_make_works(self):
+        url = reverse('profile_make', args=[])
+        self.assertEquals(resolve(url).func, profile_make)
+    
+    def test_profile_works(self):
+        url = reverse('profile', args=[])
+        self.assertEquals(resolve(url).func, profile)
 
 """
 Check to see if all the views use the correct template and makes sure the page is valid
@@ -166,3 +190,5 @@ class TestViews(TestCase):
         response = self.client.get(self.volunteer_list)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'donation_app/volunteer.html')
+        
+
