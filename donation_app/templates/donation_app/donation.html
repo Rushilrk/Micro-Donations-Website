@@ -69,6 +69,7 @@
                     <a href="{% url 'donation_detail' donation.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                     {% if user.id == donation.creator.id %}
                     <a href="{% url 'update_donation' donation.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    <a href="{% url 'delete_donation' donation.slug  %}" class="btn btn-primary">Delete &rarr;</a>
                     {% endif %}
                 </div>
             </div>
