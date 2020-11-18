@@ -3,3 +3,4 @@ gunicorn
 django-allauth
 bootstrap4
 Pillow
+psycopg2
