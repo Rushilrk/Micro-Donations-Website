@@ -159,6 +159,7 @@ class TestUrls(SimpleTestCase):
         url = reverse('profile', args=[])
         self.assertEquals(resolve(url).func, profile)
 
+
 """
 Check to see if all the views use the correct template and makes sure the page is valid
 """
@@ -190,5 +191,4 @@ class TestViews(TestCase):
         response = self.client.get(self.volunteer_list)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'donation_app/volunteer.html')
-        
 
