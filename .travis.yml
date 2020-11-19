@@ -12,3 +12,7 @@ deploy:
   app: micro-donations
   on:
     repo: uva-cs3240-f20/project-2-19
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+services:
+  - postgresql
