@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -81,26 +83,24 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+load_dotenv()
+DATABASES = {'default': dj_database_url.config()}
 
-DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.postgresql',
-    #    'NAME': 'd2kqd2lbot8bdc',
-    #    'USER': 'yrzebdxghxthqa',
-    #    'PASSWORD': '9209f8203fc48cb8c0d9d7be3f4be4a49817035e7578c9e96ab43c59c7d08fc4',
-    #    'HOST': 'ec2-54-211-169-227.compute-1.amazonaws.com',
-    #    'PORT': '5432',
-    #}
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test_db',
-        'USER': 'postgres',
-        'PASSWORD': '',
-    }
-}
+#    'ENGINE': 'django.db.backends.postgresql',
+#    'NAME': 'd2kqd2lbot8bdc',
+#    'USER': 'yrzebdxghxthqa',
+#    'PASSWORD': '9209f8203fc48cb8c0d9d7be3f4be4a49817035e7578c9e96ab43c59c7d08fc4',
+#    'HOST': 'ec2-54-211-169-227.compute-1.amazonaws.com',
+#    'PORT': '5432',
+
+#    'ENGINE': 'django.db.backends.postgresql',
+#    'NAME': 'test_db',
+#    'USER': 'postgres',
+#    'PASSWORD': '',
+
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
-db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=False)
 DATABASES['default'].update(db_from_env)
 
 
