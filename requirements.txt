@@ -5,4 +5,4 @@ django-allauth
 bootstrap4
 Pillow
 dj_database_url
-dotenv
+python-dotenv
