@@ -1,10 +1,15 @@
 language: python
 python:
 - '3.8'
+services:
+  - postgresql
 install:
 - pip install -r requirements-travis.txt
+before_script:
+    - psql -c 'create database travis_ci_test;' -U postgres
+    - psql -c "CREATE USER db_username WITH PASSWORD 'db_password';" -U postgres
 script:
-- python manage.py test
+- python manage.py test --keepdb
 deploy:
   provider: heroku
   api_key:
@@ -12,7 +17,4 @@ deploy:
   app: micro-donations
   on:
     repo: uva-cs3240-f20/project-2-19
-before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-services:
-  - postgresql
+
