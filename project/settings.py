@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'u=y*+cn7y-if_v_23!+0trup&h9cihu@qodsc3*%7dkkpph_bi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -86,21 +86,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 load_dotenv()
 DATABASES = {'default': dj_database_url.config()}
 
-#    'ENGINE': 'django.db.backends.postgresql',
-#    'NAME': 'd2kqd2lbot8bdc',
-#    'USER': 'yrzebdxghxthqa',
-#    'PASSWORD': '9209f8203fc48cb8c0d9d7be3f4be4a49817035e7578c9e96ab43c59c7d08fc4',
-#    'HOST': 'ec2-54-211-169-227.compute-1.amazonaws.com',
-#    'PORT': '5432',
-
-#    'ENGINE': 'django.db.backends.postgresql',
-#    'NAME': 'test_db',
-#    'USER': 'postgres',
-#    'PASSWORD': '',
-
-
 DATABASE_URL = os.environ.get('DATABASE_URL')
-db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=False)
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 
@@ -169,5 +156,6 @@ try:
     # Configure Django App for Heroku.
     import django_heroku
     django_heroku.settings(locals())
+    del DATABASES['default']['OPTIONS']['sslmode']
 except ImportError:
     found = False
