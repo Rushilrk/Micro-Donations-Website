@@ -89,14 +89,14 @@ DATABASES = {
         'PASSWORD': '9209f8203fc48cb8c0d9d7be3f4be4a49817035e7578c9e96ab43c59c7d08fc4',
         'HOST': 'ec2-54-211-169-227.compute-1.amazonaws.com',
         'PORT': '5432',
-    },
-    'postgres': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'travis_ci_test',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'TEST': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
     }
 }
 
