@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load socialaccount %}
+{% load bootstrap %}
 <html lang="en">
 <head>
     <title>View All Volunteering Opportunities</title>
@@ -57,9 +58,13 @@
     <p>Discover or find donations or volunteer opportunities below!</p>
 </div>
 <div class="container">
+    <form method="GET">
+        {{ filter.form| bootstrap}}
+        <button type = "submit" class = "btn btn-primary">Search</button>
+    </form>
     <div class="row">
         <div class="col-md-8 mt-3 left">
-            {% for volunteer in volunteer_list %}
+            {% for volunteer in filter.qs %}
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ volunteer.title }}</h2>
