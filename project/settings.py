@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,17 +83,14 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+load_dotenv()
+DATABASES = {'default': dj_database_url.config()}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASE_URL = os.environ.get('DATABASE_URL')
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -156,5 +156,6 @@ try:
     # Configure Django App for Heroku.
     import django_heroku
     django_heroku.settings(locals())
+    del DATABASES['default']['OPTIONS']['sslmode']
 except ImportError:
     found = False
