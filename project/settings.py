@@ -90,7 +90,12 @@ DATABASES = {
         'HOST': 'ec2-54-211-169-227.compute-1.amazonaws.com',
         'PORT': '5432',
         'TEST': {
-            'NAME': 'test_d2kqd2lbot8bdc',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'd2kqd2lbot8bdc',
+            'USER': 'yrzebdxghxthqa',
+            'PASSWORD': '9209f8203fc48cb8c0d9d7be3f4be4a49817035e7578c9e96ab43c59c7d08fc4',
+            'HOST': 'ec2-54-211-169-227.compute-1.amazonaws.com',
+            'PORT': '5432',
         },
     }
 }
