@@ -4,3 +4,4 @@ django-heroku
 django-allauth
 bootstrap4
 Pillow
+dj-database-url
