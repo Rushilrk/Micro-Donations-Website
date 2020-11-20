@@ -6,3 +6,5 @@ bootstrap4
 Pillow
 dj_database_url
 python-dotenv
+django-filter
+django-bootstrap-form
