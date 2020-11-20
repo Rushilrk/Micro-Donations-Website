@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load socialaccount %}
+{% load bootstrap %}
 <html lang="en">
 <head>
     <title>View All Donations</title>
@@ -56,10 +57,16 @@
   <p>View All Donations Here</p>
     <p>Discover or find donations or volunteer opportunities below!</p>
 </div>
+
 <div class="container">
+
+    <form method="GET">
+        {{ filter.form| bootstrap}}
+        <button type = "submit" class = "btn btn-primary">Search</button>
+    </form>
     <div class="row">
         <div class="col-md-8 mt-3 left">
-            {% for donation in object_list %}
+            {% for donation in filter.qs %}
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ donation.title }}</h2>
@@ -69,7 +76,6 @@
                     <a href="{% url 'donation_detail' donation.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                     {% if user.id == donation.creator.id %}
                     <a href="{% url 'update_donation' donation.slug  %}" class="btn btn-primary">Update &rarr;</a>
-                    <a href="{% url 'delete_donation' donation.slug  %}" class="btn btn-primary">Delete &rarr;</a>
                     {% endif %}
                 </div>
             </div>
