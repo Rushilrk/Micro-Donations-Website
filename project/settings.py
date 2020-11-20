@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'bootstrap4',
     'donation_app',
+    'django_filters',
+    'bootstrapform',
 
     'allauth',
     'allauth.account',
