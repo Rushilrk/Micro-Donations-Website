@@ -4,6 +4,7 @@ from django.views import generic
 from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm, MakeProfile, ProfileUpdate
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
+from .filters import DonationFilter, VolunteerFilter
 # Create your views here.
 
 
@@ -32,9 +33,13 @@ def volunteer_make(request):
 
 
 class DonationList(generic.ListView):
-    queryset = Donation.objects.filter(status=1).order_by('-created_on')
+    model = Donation
     template_name = 'donation_app/donation.html'
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = DonationFilter(self.request.GET, queryset = self.get_queryset())
+        return context
 
 class DonationDetails(generic.DetailView):
     model = Donation
@@ -42,8 +47,12 @@ class DonationDetails(generic.DetailView):
 
 
 class VolunteerList(generic.ListView):
-    queryset = Volunteer.objects.filter(status=1).order_by('-created_on')
+    model = Volunteer
     template_name = 'donation_app/volunteer.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = VolunteerFilter(self.request.GET, queryset = self.get_queryset())
+        return context
 
 
 class VolunteerDetails(generic.DetailView):
