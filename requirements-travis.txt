@@ -4,3 +4,4 @@ django-allauth
 bootstrap4
 Pillow
 django-filter
+django-bootstrap-form
