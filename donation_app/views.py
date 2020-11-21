@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect, redirect
-from .models import Donation, Volunteer
+from .models import Donation, Volunteer, Profile
 from django.views import generic
 from .forms import DonationForm, VolunteerForm, UpdateDonationForm, UpdateVolunteerForm, MakeProfile, ProfileUpdate
 from django.urls import reverse_lazy
@@ -91,13 +91,14 @@ class VolunteerDelete(generic.DeleteView):
 
 def profile_make(request):
     if request.method == "POST":
-        prof = MakeProfile(request.POST, request.FILES)
+        prof = MakeProfile(request.POST, request.FILES, user = request.user)
         if prof.is_valid():
             pf = prof.save(commit=False)
+            pf.user = request.user
             pf.save()
             return HttpResponseRedirect('view')
     else:
-        prof = MakeProfile()
+        prof = MakeProfile(user=request.user)
     return render(request, 'donation_app/profile_form.html', {'form': prof})
 
 
@@ -105,7 +106,6 @@ def profile(request):
     if request.method == "POST":
         form_class = ProfileUpdate(request.POST, request.FILES, instance=request.user.profile)
         if form_class.is_valid():
-            form_class.creator = request.user
             form_class.save()
         return redirect('profile')
     else:
