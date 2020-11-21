@@ -4,4 +4,7 @@ django-allauth
 bootstrap4
 Pillow
 psycopg2
-dj-database-url
+dj_database_url
+python-dotenv
+django-filter
+django-bootstrap-form

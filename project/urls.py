@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from donation_app import views
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="donation_app/index.html"), name='main'),
+    path('', views.latest_posts, name='main'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('donation_app.urls')),

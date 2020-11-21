@@ -57,8 +57,8 @@
 <div class="container">
 {% block content %}
     <h1>Create Your Profile</h1>
-    User - {{ user.id }}
-    Profile - {{ profile.bio }}
+    User - {{ user.form }}
+    Profile - {{ form.username }}
     <div class="form-group">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
