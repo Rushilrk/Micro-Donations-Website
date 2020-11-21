@@ -52,9 +52,12 @@ class UpdateVolunteerForm(forms.ModelForm):
 
 
 class MakeProfile(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super(MakeProfile, self).__init__(*args, **kwargs)
     class Meta:
         model = Profile
-        exclude = ['creator']
+        exclude = ['user']
         fields = ('image', 'bio', 'contact_info')
         widgets = {
             'bio': forms.Textarea(attrs={'class': 'form-control'}),
@@ -63,6 +66,7 @@ class MakeProfile(forms.ModelForm):
 
 
 class ProfileUpdate(forms.ModelForm):
+    
     class Meta:
         model = Profile
         fields = ('image', 'bio', 'contact_info')
