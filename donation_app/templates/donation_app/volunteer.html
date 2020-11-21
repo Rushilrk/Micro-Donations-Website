@@ -44,7 +44,7 @@
               <a class="nav-link" href="{% url 'profile' %}">Profile</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="account/logout">Sign Out</a>
+              <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="/accounts/google/login">Sign Into Different Account</a>
@@ -74,6 +74,7 @@
                     <a href="{% url 'volunteer_detail' volunteer.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                     {% if user.id == volunteer.creator.id %}
                     <a href="{% url 'update_volunteer' volunteer.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    <a href="{% url 'delete_volunteer' volunteer.slug %}" class="btn btn-primary">Delete</a>
                     {% endif %}
                 </div>
             </div>
