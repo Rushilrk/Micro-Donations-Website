@@ -39,7 +39,7 @@
           <li class="nav-item">
               <a class="nav-link" href="{% url 'profile_make' %}">Create Profile</a>
           </li>
-          {% if user.id == form.id %}
+          {% if user.profile.user != "" %}
           <li class="nav-item">
               <a class="nav-link" href="{% url 'profile' %}">Profile</a>
           </li>
@@ -63,7 +63,7 @@
   <div class="row">
     <div class="col-sm-4 border" style="margin-bottom: 900px">
       <h2>Profile</h2>
-        {% if user.username == prof.id %}
+        {% if user.profile.user != "" %}
       <h5>{{ user.username }}</h5>
       <img  src="{{ user.profile.image.url }}" width="250" height="165">
       <p> Bio - {{ user.profile.bio }}</p>
