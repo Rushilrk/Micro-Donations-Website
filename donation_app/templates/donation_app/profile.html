@@ -64,6 +64,88 @@
             <p> Contact Information - {{ user.profile.contact_info }}</p>
         </div>
     </div>
+    
+    
+     <div class="col-sm-8" style="margin-bottom:30px">
+        <div class="container border">
+      <h2>My Donation Postings</h2>
+            {% for donation in don_posts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ donation.title }}</h2>
+                    <p class="card-text text-muted h6">{{ donation.creator }} | {{ donation.created_on}} </p>
+                    <p class="card-text text-muted h6">{{ donation.contact_info }} | {{ donation.external_link}} </p>
+                    <p class="card-text">{{donation.description|slice:":200" }}</p>
+                    <a href="{% url 'donation_detail' donation.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    {% if user.id == donation.creator.id %}
+                    <a href="{% url 'update_donation' donation.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        <div class="container border">
+      <h2>My Volunteer Postings</h2>
+      {% for volunteer in vol_posts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ volunteer.title }}</h2>
+                    <p class="card-text text-muted h6">{{ volunteer.creator }} | {{ volunteer.created_on}} </p>
+                    <p class="card-text text-muted h6">{{ volunteer.contact_info }} | {{ volunteer.external_link}} </p>
+                    <p class="card-text">{{volunteer.description|slice:":200" }}</p>
+                    <a href="{% url 'volunteer_detail' volunteer.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    {% if user.id == volunteer.creator.id %}
+                    <a href="{% url 'update_volunteer' volunteer.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        <div class="container border">
+        <h2>My drafts</h2>
+      {% for volunteer in vol_drafts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ volunteer.title }}</h2>
+                    <p class="card-text text-muted h6">{{ volunteer.creator }} | {{ volunteer.created_on}} </p>
+                    <p class="card-text text-muted h6">{{ volunteer.contact_info }} | {{ volunteer.external_link}} </p>
+                    <p class="card-text">{{volunteer.description|slice:":200" }}</p>
+                    <a href="{% url 'volunteer_detail' volunteer.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    {% if user.id == volunteer.creator.id %}
+                    <a href="{% url 'update_volunteer' volunteer.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% for donation in don_drafts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ donation.title }}</h2>
+                    <p class="card-text text-muted h6">{{ donation.creator }} | {{ donation.created_on}} </p>
+                    <p class="card-text text-muted h6">{{ donation.contact_info }} | {{ donation.external_link}} </p>
+                    <p class="card-text">{{donation.description|slice:":200" }}</p>
+                    <a href="{% url 'donation_detail' donation.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    {% if user.id == donation.creator.id %}
+                    <a href="{% url 'update_donation' donation.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    
+  </div>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="container">
     {% block content %}
     <h1>Update Your Profile</h1>

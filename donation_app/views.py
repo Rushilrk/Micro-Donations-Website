@@ -19,6 +19,7 @@ def donation_make(request):
         donate = DonationForm(request.POST)
         if donate.is_valid():
             don = donate.save(commit=False)
+            don.creator = request.user
             don.save()
             return HttpResponseRedirect('list')
     else:
@@ -31,6 +32,7 @@ def volunteer_make(request):
         volunteer = VolunteerForm(request.POST)
         if volunteer.is_valid():
             vol = volunteer.save(commit=False)
+            vol.creator = request.user
             vol.save()
             return HttpResponseRedirect('list')
     else:
@@ -103,12 +105,21 @@ def profile(request):
     if request.method == "POST":
         form_class = ProfileUpdate(request.POST, request.FILES, instance=request.user.profile)
         if form_class.is_valid():
+            form_class.creator = request.user
             form_class.save()
         return redirect('profile')
     else:
         form_class = ProfileUpdate(instance=request.user.profile)
+        don_posts = Donation.objects.filter(status=True).filter(creator=request.user)
+        vol_posts = Volunteer.objects.filter(status=True).filter(creator=request.user)
+        don_drafts = Donation.objects.filter(status=0).filter(creator=request.user)
+        vol_drafts = Volunteer.objects.filter(status=0).filter(creator=request.user)
     context = {
-        'form': form_class
+        'form': form_class,
+        'don_posts' : don_posts,
+        'vol_posts' : vol_posts,
+        'don_drafts' : don_drafts,
+        'vol_drafts' : vol_drafts,
     }
     return render(request, 'donation_app/profile.html', context)
 
