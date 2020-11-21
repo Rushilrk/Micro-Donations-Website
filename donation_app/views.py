@@ -8,6 +8,12 @@ from .filters import DonationFilter, VolunteerFilter
 # Create your views here.
 
 
+def latest_posts(request):
+    don_posts = Donation.objects.filter(status=True).order_by('updated_on')[0:3]
+    vol_posts = Volunteer.objects.filter(status=True).order_by('updated_on')[0:3]
+    return render(request, 'donation_app/index.html', {'don_post': don_posts, 'vol_post': vol_posts})
+
+
 def donation_make(request):
     if request.method == "POST":
         donate = DonationForm(request.POST)

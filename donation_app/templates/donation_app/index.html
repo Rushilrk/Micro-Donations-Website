@@ -39,9 +39,11 @@
           <li class="nav-item">
               <a class="nav-link" href="{% url 'profile_make' %}">Create Profile</a>
           </li>
+          {% if user.profile.user != "" %}
           <li class="nav-item">
               <a class="nav-link" href="{% url 'profile' %}">Profile</a>
           </li>
+          {% endif %}
           <li class="nav-item">
               <a class="nav-link" href="account/logout">Sign Out</a>
           </li>
@@ -57,7 +59,83 @@
   <p>Welcome, {{ user.username }}!</p>
     <p>Discover or find donations or volunteer opportunities below!</p>
 </div>
-
+<div class="container" style="margin-top:30px">
+  <div class="row">
+    <div class="col-sm-4 border" style="margin-bottom: 900px">
+      <h2>Profile</h2>
+        {% if user.profile.user != "" %}
+      <h5>{{ user.username }}</h5>
+      <img  src="{{ user.profile.image.url }}" width="250" height="165">
+      <p> Bio - {{ user.profile.bio }}</p>
+        <p> Contact Information - {{ user.profile.contact_info }}</p>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Update Profile&rarr;</a>
+        {% else %}
+        <a href="{% url 'profile_make' %}" class="btn btn-primary">Create Your Profile &rarr;</a>
+        {% endif %}
+      <h3>Shortcut Links</h3>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'main' %}">Home</a>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'donation' %}">Donations</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'volunteer' %}">Volunteer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'donation_make' %}">Create a Donation</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'volunteer_make' %}">Create a Volunteering Opportunity</a>
+      </li>
+      </ul>
+      <hr class="d-sm-none">
+    </div>
+    <div class="col-sm-8" style="margin-bottom:30px">
+        <div class="container border">
+      <h2>Most Recent Donation Postings</h2>
+            {% for donation in don_post %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ donation.title }}</h2>
+                    <p class="card-text text-muted h6">{{ donation.creator }} | {{ donation.created_on}} </p>
+                    <p class="card-text text-muted h6">{{ donation.contact_info }} | {{ donation.external_link}} </p>
+                    <p class="card-text">{{donation.description|slice:":200" }}</p>
+                    <a href="{% url 'donation_detail' donation.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    {% if user.id == donation.creator.id %}
+                    <a href="{% url 'update_donation' donation.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <button type="button" onclick="location.href='/donation/list'" class="btn btn-link" >View All Donations</button>
+            <br>
+            <button type="button" onclick="location.href='/donation'" class="btn btn-link" >Create Your Own Donation Posting</button>
+        </div>
+        <br>
+        <div class="container border">
+      <h2>Volunteer</h2>
+      {% for volunteer in vol_post %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ volunteer.title }}</h2>
+                    <p class="card-text text-muted h6">{{ volunteer.creator }} | {{ volunteer.created_on}} </p>
+                    <p class="card-text text-muted h6">{{ volunteer.contact_info }} | {{ volunteer.external_link}} </p>
+                    <p class="card-text">{{volunteer.description|slice:":200" }}</p>
+                    <a href="{% url 'volunteer_detail' volunteer.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    {% if user.id == volunteer.creator.id %}
+                    <a href="{% url 'update_volunteer' volunteer.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <button type="button" onclick="location.href='/volunteer/list'" class="btn btn-link" >View All Volunteering Opportnities</button>
+            <br>
+            <button type="button" onclick="location.href='/volunteer'" class="btn btn-link" >Create Your Own Volunteer Posting</button>
+        </div>
+    </div>
+  </div>
+</div>
 {% else %}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
   <a class="navbar-brand" href="#">Micro-Donations</a>
