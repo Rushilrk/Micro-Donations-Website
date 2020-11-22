@@ -13,6 +13,51 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+'''
+REFERENCES
+  Title: Build A Blog Comment Section - Django Blog #33
+  Author: Codemy.com
+  Date: July 16, 2020
+  Code version: Python 3.0 or later, HTML
+  URL: https://www.youtube.com/watch?v=hZrlh4qU4eQ&ab_channel=Codemy.com
+  Software License: BSD-3
+
+  Title: Creating Comments System With Django
+  Author: Django Central
+  Date: September 2020
+  Code version: Python 3.0 or later, HTML
+  URL: https://djangocentral.com/creating-comments-system-with-django/
+  Software License: BSD-3
+
+  Title: In 5 mins: Set up Google login to sign up users on Django
+  Author: Zoe Chew
+  Date: July 2019
+  Code version: Python 3.0 or later, HTML, Google Login API
+  URL: https://whizzoe.medium.com/in-5-mins-set-up-google-login-to-sign-up-users-on-django-e71d5c38f5d5
+  Software License: BSD-3, Google Open Source
+  
+  Title: Python Django Tutorial: Full-Featured Web App Part 8 - User Profile and Picture
+  Author: Corey Schafer
+  Date: August 31, 2018
+  Code version: Python 3.0 or later, HTML
+  URL: https://www.youtube.com/watch?v=FdVuKt_iuSI&ab_channel=CoreySchafer
+  Software License: BSD-3, open source HPND License
+
+  Title: Working with Forms
+  Author: Django (Documentation)
+  Date: September 2020
+  Code version: Python 3.0 or later, HTML
+  URL: https://docs.djangoproject.com/en/3.1/topics/forms/
+  Software License: BSD-3
+
+  Title: Writing your first Django app
+  Author: Django (Documentation)
+  Date: September 2020
+  Code version: Python 3.0 or later, HTML
+  URL: https://docs.djangoproject.com/en/3.1/intro/tutorial01/ and the rest of the tutorial in the link
+  Software License: BSD-3
+'''
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
