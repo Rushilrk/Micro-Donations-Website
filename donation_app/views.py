@@ -46,8 +46,8 @@ from .filters import DonationFilter, VolunteerFilter
 
 
 def latest_posts(request):
-    don_posts = Donation.objects.filter(status=True).order_by('updated_on')[0:3]
-    vol_posts = Volunteer.objects.filter(status=True).order_by('updated_on')[0:3]
+    don_posts = Donation.objects.filter(status=True).order_by('updated_on').reverse()[0:3]
+    vol_posts = Volunteer.objects.filter(status=True).order_by('updated_on').reverse()[0:3]
     return render(request, 'donation_app/index.html', {'don_post': don_posts, 'vol_post': vol_posts})
 
 
