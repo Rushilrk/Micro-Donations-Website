@@ -134,6 +134,7 @@ REFERENCES
     <div class="row">
         <div class="col-md-8 mt-3 left">
             {% for volunteer in filter.qs %}
+            {% if volunteer.status == 1 %}
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ volunteer.title }}</h2>
@@ -147,6 +148,8 @@ REFERENCES
                     {% endif %}
                 </div>
             </div>
+            {% endif %}
+            
             {% endfor %}
         </div>
     </div>
