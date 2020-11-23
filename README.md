@@ -2,6 +2,7 @@
 project-2-19 created by GitHub Classroom
 
 This is a build for team 2-19.  We have created an application for a micro-donation and volunteering app.
+All citations of sources used are provided in the .py and HTML files of our project
 Please read through this brief overview of the features that can be used and what to look for as you browse our application.
 
 First off, you will need to sign in with a a Google account to access the different features in our application.  
