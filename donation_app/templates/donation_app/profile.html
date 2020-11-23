@@ -148,6 +148,7 @@ REFERENCES
                     <a href="{% url 'donation_detail' donation.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                     {% if user.id == donation.creator.id %}
                     <a href="{% url 'update_donation' donation.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    <a href="{% url 'delete_donation' donation.slug %}" class="btn btn-primary">Delete</a>
                     {% endif %}
                 </div>
             </div>
@@ -166,6 +167,7 @@ REFERENCES
                     <a href="{% url 'volunteer_detail' volunteer.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                     {% if user.id == volunteer.creator.id %}
                     <a href="{% url 'update_volunteer' volunteer.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    <a href="{% url 'delete_volunteer' volunteer.slug %}" class="btn btn-primary">Delete</a>
                     {% endif %}
                 </div>
             </div>
@@ -183,6 +185,7 @@ REFERENCES
                     <a href="{% url 'volunteer_detail' volunteer.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                     {% if user.id == volunteer.creator.id %}
                     <a href="{% url 'update_volunteer' volunteer.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    <a href="{% url 'delete_volunteer' volunteer.slug %}" class="btn btn-primary">Delete</a>
                     {% endif %}
                 </div>
             </div>
@@ -197,6 +200,7 @@ REFERENCES
                     <a href="{% url 'donation_detail' donation.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                     {% if user.id == donation.creator.id %}
                     <a href="{% url 'update_donation' donation.slug  %}" class="btn btn-primary">Update &rarr;</a>
+                    <a href="{% url 'delete_donation' donation.slug %}" class="btn btn-primary">Delete</a>
                     {% endif %}
                 </div>
             </div>

@@ -136,6 +136,7 @@ REFERENCES
     <div class="row">
         <div class="col-md-8 mt-3 left">
             {% for donation in filter.qs %}
+            {% if donation.status == 1 %}
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ donation.title }}</h2>
@@ -149,6 +150,7 @@ REFERENCES
                     {% endif %}
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

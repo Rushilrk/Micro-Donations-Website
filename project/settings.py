@@ -25,6 +25,13 @@ REFERENCES
   URL: https://djangocentral.com/creating-comments-system-with-django/
   Software License: BSD-3
 
+  Title: Managing static files (e.g. images, JavaScript, CSS)
+  Author: Django (Documentation)
+  Date: October 2020
+  Code version: Python 3.0 or later, HTML
+  URL: https://docs.djangoproject.com/en/3.1/howto/static-files/
+  Software License: BSD-3, open source HPND License
+  
   Title: Python Django Tutorial: Full-Featured Web App Part 8 - User Profile and Picture
   Author: Corey Schafer
   Date: August 31, 2018

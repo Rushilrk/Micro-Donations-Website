@@ -14,6 +14,13 @@ REFERENCES
   URL: https://djangocentral.com/creating-comments-system-with-django/
   Software License: BSD-3
 
+  Title: Managing static files (e.g. images, JavaScript, CSS)
+  Author: Django (Documentation)
+  Date: October 2020
+  Code version: Python 3.0 or later, HTML
+  URL: https://docs.djangoproject.com/en/3.1/howto/static-files/
+  Software License: BSD-3, open source HPND License
+
   Title: Python Django Tutorial: Full-Featured Web App Part 8 - User Profile and Picture
   Author: Corey Schafer
   Date: August 31, 2018
@@ -34,6 +41,14 @@ REFERENCES
   Code version: Python 3.0 or later, HTML
   URL: https://docs.djangoproject.com/en/3.1/intro/tutorial01/ and the rest of the tutorial in the link
   Software License: BSD-3
+  
+  Title: Unique Slugify
+  Author: SmileyChris
+  Date: April 8, 2008
+  Code Version: Python
+  URL: https://djangosnippets.org/snippets/690/
+  Software License: None in particular
+  
 '''
 import re
 from django.db import models
