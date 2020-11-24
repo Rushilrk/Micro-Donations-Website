@@ -20,7 +20,14 @@ REFERENCES
   Code version: Python 3.0 or later, HTML
   URL: https://www.youtube.com/watch?v=FdVuKt_iuSI&ab_channel=CoreySchafer
   Software License: BSD-3, open source HPND License
-
+  
+  Title: Unique Slugify
+  Author: SmileyChris
+  Date: April 8, 2008
+  Code Version: Python
+  URL: https://djangosnippets.org/snippets/690/
+  
+  Software License: None in particular
   Title: Working with Forms
   Author: Django (Documentation)
   Date: September 2020
@@ -34,13 +41,6 @@ REFERENCES
   Code version: Python 3.0 or later, HTML
   URL: https://docs.djangoproject.com/en/3.1/intro/tutorial01/ and the rest of the tutorial in the link
   Software License: BSD-3
-  
-  Title: Unique Slugify
-  Author: SmileyChris
-  Date: April 8, 2008
-  Code Version: Python
-  URL: https://djangosnippets.org/snippets/690/
-  Software License: None in particular
   
 '''
 import re
