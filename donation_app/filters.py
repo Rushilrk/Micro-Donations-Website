@@ -13,7 +13,14 @@ REFERENCES
   Code version: Python 3.0 or later, HTML
   URL: https://djangocentral.com/creating-comments-system-with-django/
   Software License: BSD-3
-
+  
+  Title: Django Filtering System with django-filter - Filter Queryset (2018)
+  Author: The Dumbfounds
+  Date: Jun 23, 2018
+  Code version: Python 3.0 or later, HTML
+  URL: https://www.youtube.com/watch?v=nle3u6Ww6Xk
+  Software License: N/A
+  
   Title: Python Django Tutorial: Full-Featured Web App Part 8 - User Profile and Picture
   Author: Corey Schafer
   Date: August 31, 2018
@@ -34,6 +41,8 @@ REFERENCES
   Code version: Python 3.0 or later, HTML
   URL: https://docs.djangoproject.com/en/3.1/intro/tutorial01/ and the rest of the tutorial in the link
   Software License: BSD-3
+  
+ 
 '''
 import django_filters
 from .models import Donation, Volunteer
